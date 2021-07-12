@@ -1,6 +1,6 @@
 {
   "name": "blockly-field-text-box",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Blockly true multiline text input field",
   "scripts": {
     "audit:fix": "blockly-scripts auditFix",
