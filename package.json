@@ -23,9 +23,12 @@
     "blockly-field-text-box",
     "multiline"
   ],
-  "homepage": "",
-  "bugs": {},
-  "repository": {},
+  "homepage": "https://github.com/tomas-berg/blockly-field-text-box#readme",
+  "bugs": "https://github.com/tomas-berg/blockly-field-text-box/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomas-berg/blockly-field-text-box.git"
+  },
   "license": "Apache-2.0",
   "directories": {
     "dist": "dist",
