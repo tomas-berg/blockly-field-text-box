@@ -40,13 +40,13 @@ npm run build
 
 ```js
 import * as Blockly from 'blockly'
-import 'blockly-field-text-box'
+import {FieldTextBox} from 'blockly-field-text-box'
 
 Blockly.Blocks['test_field'] = {
   init: function () {
     this.appendDummyInput()
       .appendField('Text block: ')
-      .appendField(new Blockly.FieldTextBox('Text value'), 'FIELDNAME')
+      .appendField(new FieldTextBox('Text value'), 'FIELDNAME')
   }
 };
 ```

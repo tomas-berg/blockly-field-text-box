@@ -15,7 +15,7 @@ const DEFAULT_LINE_CHARS = 40; // default
 /**
  * A Blockly true multiline text input.
  */
-export default class FieldTextBox extends Blockly.FieldMultilineInput {
+export class FieldTextBox extends Blockly.FieldMultilineInput {
 /**
  * Constructs a FieldTextBox.
  * @param {!String} value A JSON object with options.
