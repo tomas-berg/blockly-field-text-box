@@ -29,6 +29,7 @@ export default class FieldTextBox extends Blockly.FieldMultilineInput {
     const _options = {...options};
     const maxLineChars = Math.abs(parseInt(_options.maxLineChars, 10));
     this.maxLineChars_ = maxLineChars || DEFAULT_LINE_CHARS;
+    this.closeOnEnter_ = _options.closeOnEnter === true;
   }
 
   /**
@@ -293,6 +294,20 @@ export default class FieldTextBox extends Blockly.FieldMultilineInput {
    */
   getMaxLineChars() {
     return this.maxLineChars_;
+  }
+
+  /**
+   * Handle key down to the editor.
+   * @param {!Event} e Keyboard event.
+   * @protected
+   * @override
+   */
+  onHtmlInputKeyDown_(e) {
+    if (e.keyCode === Blockly.utils.KeyCodes.ENTER && this.closeOnEnter_) {
+      Blockly.FieldTextInput.prototype.onHtmlInputKeyDown_.call(this, e);
+    } else {
+      Blockly.FieldMultilineInput.prototype.onHtmlInputKeyDown_.call(this, e);
+    }
   }
 }
 
