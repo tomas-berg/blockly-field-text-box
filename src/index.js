@@ -177,42 +177,41 @@ export class FieldTextBox extends Blockly.FieldMultilineInput {
          this.getConstants().FIELD_TEXT_HEIGHT +
          (i > 0 ? this.getConstants().FIELD_BORDER_RECT_Y_PADDING : 0);
     }
-    if (this.isBeingEdited_) {
-      // The default width is based on the longest line in the display text,
-      // but when it's being edited, width should be calculated based on the
-      // absolute longest line, even if it would be truncated after editing.
-      // Otherwise we would get wrong editor width when there are more
-      // lines than this.maxLines_.
-      const actualEditorLines = FieldTextBox.splitOnRows(
-          this.value_,
-          this.maxLineChars_
-      );
-      const dummyTextElement = Blockly.utils.dom.createSvgElement(
-          Blockly.utils.Svg.TEXT, {
-            class: 'blocklyText blocklyMultilineText',
-          }
-      );
-      const fontSize = this.getConstants().FIELD_TEXT_FONTSIZE;
-      const fontWeight = this.getConstants().FIELD_TEXT_FONTWEIGHT;
-      const fontFamily = this.getConstants().FIELD_TEXT_FONTFAMILY;
+    // UPD.: Assume that being edited.
+    // The default width is based on the longest line in the display text,
+    // but when it's being edited, width should be calculated based on the
+    // absolute longest line, even if it would be truncated after editing.
+    // Otherwise we would get wrong editor width when there are more
+    // lines than this.maxLines_.
+    const actualEditorLines = FieldTextBox.splitOnRows(
+        this.value_,
+        this.maxLineChars_
+    );
+    const dummyTextElement = Blockly.utils.dom.createSvgElement(
+        Blockly.utils.Svg.TEXT, {
+          class: 'blocklyText blocklyMultilineText',
+        }
+    );
+    const fontSize = this.getConstants().FIELD_TEXT_FONTSIZE;
+    const fontWeight = this.getConstants().FIELD_TEXT_FONTWEIGHT;
+    const fontFamily = this.getConstants().FIELD_TEXT_FONTFAMILY;
 
-      for (let i = 0; i < actualEditorLines.length; i++) {
-        if (actualEditorLines[i].length > this.maxDisplayLength) {
-          actualEditorLines[i] = actualEditorLines[i].substring(
-              0,
-              this.maxDisplayLength
-          );
-        }
-        dummyTextElement.textContent = actualEditorLines[i];
-        const lineWidth = Blockly.utils.dom.getFastTextWidth(
-            dummyTextElement,
-            fontSize,
-            fontWeight,
-            fontFamily
+    for (let i = 0; i < actualEditorLines.length; i++) {
+      if (actualEditorLines[i].length > this.maxDisplayLength) {
+        actualEditorLines[i] = actualEditorLines[i].substring(
+            0,
+            this.maxDisplayLength
         );
-        if (lineWidth > totalWidth) {
-          totalWidth = lineWidth;
-        }
+      }
+      dummyTextElement.textContent = actualEditorLines[i];
+      const lineWidth = Blockly.utils.dom.getFastTextWidth(
+          dummyTextElement,
+          fontSize,
+          fontWeight,
+          fontFamily
+      );
+      if (lineWidth > totalWidth) {
+        totalWidth = lineWidth;
       }
     }
     if (this.borderRect_) {
@@ -232,7 +231,7 @@ export class FieldTextBox extends Blockly.FieldMultilineInput {
    * @protected
    */
   widgetCreate_() {
-    const div = Blockly.WidgetDiv.DIV;
+    const div = Blockly.WidgetDiv.getDiv();
     const scale = this.workspace_.getScale();
     const htmlInput = /** @type {HTMLTextAreaElement} */
        (document.createElement('textarea'));
