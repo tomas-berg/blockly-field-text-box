@@ -40,7 +40,8 @@ export class FieldTextBox extends Blockly.FieldMultilineInput {
    * @nocollapse
    */
   static fromJson(options) {
-    const text = Blockly.utils.parsing.replaceMessageReferences(options['text']);
+    const text = Blockly.utils.parsing
+        .replaceMessageReferences(options['text']);
     return new FieldTextBox(text, undefined, options);
   }
 
